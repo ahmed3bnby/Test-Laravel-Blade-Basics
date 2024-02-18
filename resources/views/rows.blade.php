@@ -1,0 +1,42 @@
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('Users') }}
+        </h2>
+    </x-slot>
+
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 bg-white border-b border-gray-200">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Row Number</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Registered at</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @forelse ($users as $index => $user)
+                                <tr class="{{ $index % 2 == 0 ? 'bg-blue-100' : '' }}">
+                                    <td>{{ $index + 1 }}</td>
+                                    <td>{{ $user->name }}</td>
+                                    <td class="{{ $index == 0 ? 'font-bold' : '' }}">{{ $user->email }}</td>
+                                    <td>{{ $user->created_at }}</td>
+                                </tr>
+
+                            @empty
+
+                                <td colspan="3">No Rows Here.</td>
+                            @endforelse
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</x-app-layout>
